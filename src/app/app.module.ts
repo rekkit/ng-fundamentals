@@ -16,6 +16,7 @@ import { EventRouteActivator } from './events/event-details/event-route-activato
 import { EventListResolver } from './events/events-list-resolver.service';
 import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthService } from './user/auth.service';
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    UserModule
+    UserModule,
+    FormsModule
   ],
   providers: [
     EventService,
