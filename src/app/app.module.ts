@@ -6,7 +6,6 @@ import { EventListComponent } from './events/events-list.component';
 import { EventThumbnailComponent } from './events/event-thumbnail.component';
 import { NavbarComponent } from './nav/navbar.component';
 import { EventService } from './events/shared/event.service';
-import { ToastrService } from './common/toastr.service';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { appRoutes } from './routes'
 import { RouterModule } from '@angular/router';
@@ -16,7 +15,13 @@ import { EventRouteActivator } from './events/event-details/event-route-activato
 import { EventListResolver } from './events/events-list-resolver.service';
 import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateSessionComponent } from './create-session/create-session.component';
+import { SessionListComponent } from './events/session-list/session-list.component';
+import { CollapsibleWellComponent } from './common/collapsible-well.component';
+import { TOASTR_TOKEN, IToastr } from './common/toastr.service';
+
+let toastr: IToastr = window['toastr']
 
 @NgModule({
   declarations: [
@@ -26,24 +31,31 @@ import { FormsModule } from '@angular/forms';
     EventDetailsComponent,
     EventListComponent,
     EventThumbnailComponent,
-    NavbarComponent
+    NavbarComponent,
+    CreateSessionComponent,
+    SessionListComponent,
+    CollapsibleWellComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     UserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     EventService,
-    ToastrService,
     EventRouteActivator,
     EventListResolver,
     { 
       provide: "canDeactivateCreateEvent" ,
       useValue: checkDirtyState
     },
-    AuthService
+    AuthService,
+    {
+      provide: TOASTR_TOKEN,
+      useValue: toastr
+    }
   ],
   bootstrap: [AppComponent]
 })

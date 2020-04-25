@@ -3,7 +3,6 @@
     <hr/>
     <div *ngFor="let event of events">
         <event-thumbnail
-            (click)="handleThumbnailClick(event.name)"
             [event]="event">
         </event-thumbnail>
     </div>
